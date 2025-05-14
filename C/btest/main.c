@@ -1,3 +1,4 @@
+/* I use this program to test input and output */
 #include <delay.h>
 #include <pic18fregs.h>
 
@@ -22,35 +23,25 @@ void setup(void){
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
-    INTCONbits.RBIE = 0;
+    INTCONbits.RBIE = 0;  /* RB port change Interrupt enable bit */
     INTCON2bits.RBPU = 0;
     INTCON2bits.RBIP = 1;
     RCONbits.IPEN = 1;
-
-    //NTCONbits.INT0IE = 1;
 }
 
 void isr(void) __interrupt (1) {
     if (INTCONbits.RBIF) {
-    //if (INTCONbits.INT0IF) {
     WREG = PORTB; /* Read portb to elimitate mismatch condition */
     LATD = ~LATD;
     delay1ktcy(250);
     }
-    //INTCONbits.INT0IF = 0;
     INTCONbits.RBIF = 0;
 }
 
 int main(void) {
     setup();
     for (;;) {
-        //PORTD = PORTB /* LATB does not work for reading */
-        PORTDbits.RD0 = PORTBbits.RB0;
-        if (PORTDbits.RD0){
-            PORTDbits.RD1 = 1;
-        } else PORTDbits.RD1 = 0;
-
-
+        PORTD = PORTB; /* LATB does not work for reading */
     }
     return 0;
 }

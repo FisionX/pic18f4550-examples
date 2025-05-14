@@ -1,3 +1,5 @@
+/* A blink program using a timer overflow interrupt */
+
 #include <delay.h>
 #include <pic18fregs.h>
 #include <stdint.h>

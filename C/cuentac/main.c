@@ -66,8 +66,3 @@ void main(void) {
         }
     }
 }
-
-
-/* NOTES
- * Looks like I can treat register like normal variables
- */

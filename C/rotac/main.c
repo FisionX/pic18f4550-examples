@@ -1,3 +1,4 @@
+/* this program makes light sequences using leds in port B */
 #include <pic18fregs.h>
 #include <delay.h>
 #include <stdint.h>
@@ -70,7 +71,7 @@ void rota2(void) {
     }
     return;
 }
-void rota3(void) {
+void rota3(void) { /* this is a mess, don't pay too much attention to this */
     LATD = 0x01;
     while (LATD != 0x80) {
         delay1ktcy(150);
@@ -139,7 +140,6 @@ void rota5(void) {
 }
 
 /* NOTES
- * Looks like I can treat register like normal variables
  * Use PORT instead of LAT for reading
- * != doesnt work
+ * != as a not equal condition doesn't work in SDCC
  */

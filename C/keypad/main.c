@@ -1,3 +1,6 @@
+/* SDCC C example of a 4x4 keypad attached to port B 
+ * using interrupts
+ */
 #include <pic18fregs.h>
 #include <delay.h>
 #include <stdint.h>

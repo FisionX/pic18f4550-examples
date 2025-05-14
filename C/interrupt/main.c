@@ -1,3 +1,6 @@
+/* RB change interrupt example */
+/* check documentation for your pic */
+
 #include <delay.h>
 #include <pic18fregs.h>
 
@@ -20,24 +23,20 @@ void setup(void){
     LATB = 0x00;
     ADCON1 = 0xf;
 
-    INTCONbits.GIE = 1;
+    INTCONbits.GIE = 1;   /* Enable global interrupts */
     INTCONbits.PEIE = 1;
-    INTCONbits.RBIE = 1;
+    INTCONbits.RBIE = 1;  /* RB change interrupt enable */
     INTCON2bits.RBPU = 0;
     INTCON2bits.RBIP = 1;
     RCONbits.IPEN = 1;
-
-    INTCONbits.INT0IE = 1;
 }
 
 void isr(void) __interrupt (1) {
     if (INTCONbits.RBIF) {
-    //if (INTCONbits.INT0IF) {
     WREG = PORTB; /* Read portb to elimitate mismatch condition */
     LATD = ~LATD;
     delay1ktcy(250);
     }
-    //INTCONbits.INT0IF = 0;
     INTCONbits.RBIF = 0;
 }
 
